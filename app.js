@@ -12,6 +12,29 @@ const DEFAULT_UMKM_DATA = [];
 
 let umkmData = [];
 
+// Fungsi pembantu untuk mengubah link berbagi Google Drive menjadi link gambar langsung (Direct Download)
+function cleanDriveUrl(url) {
+  if (!url) return '';
+  if (url.includes('drive.google.com')) {
+    let fileId = '';
+    if (url.includes('/file/d/')) {
+      const parts = url.split('/file/d/');
+      if (parts[1]) {
+        fileId = parts[1].split('/')[0].split('?')[0];
+      }
+    } else if (url.includes('id=')) {
+      const match = url.match(/[?&]id=([^&]+)/);
+      if (match && match[1]) {
+        fileId = match[1].split('&')[0];
+      }
+    }
+    if (fileId) {
+      return `https://drive.google.com/uc?export=download&id=${fileId}`;
+    }
+  }
+  return url;
+}
+
 // Fungsi untuk menarik data dari Google Sheets secara asinkron
 async function fetchGoogleSheetData(spreadsheetId) {
   const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`;
@@ -53,7 +76,8 @@ async function fetchGoogleSheetData(spreadsheetId) {
     if (!name || name.toLowerCase() === 'nama' || name.toLowerCase() === 'nama umkm') return; // Lewati header
 
     // Kolom B: Gambar
-    const image = cells[1] ? String(cells[1].v || '').trim() : 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600';
+    let image = cells[1] ? String(cells[1].v || '').trim() : '';
+    image = cleanDriveUrl(image) || 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600';
 
     // Kolom C: Kategori
     const category = cells[2] ? String(cells[2].v || '').trim().toLowerCase() : 'susu';
