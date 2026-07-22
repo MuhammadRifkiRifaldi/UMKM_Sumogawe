@@ -66,7 +66,7 @@ async function fetchGoogleSheetData(spreadsheetId) {
     susu: "Susu & Ternak",
     tani: "Pertanian",
     kuliner: "Kuliner",
-    toko: "Toko & Kelontong",
+    toko: "Toko Kelontong",
     kerajinan: "Kerajinan & Jasa"
   };
 
