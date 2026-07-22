@@ -475,10 +475,7 @@ body.dark-theme .filter-btn.active {
   transform: scale(1.08);
 }
 
-.category-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
+.card-category-badge, .modal-category-badge {
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 11px;
@@ -487,6 +484,16 @@ body.dark-theme .filter-btn.active {
   letter-spacing: 0.5px;
   color: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.card-category-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.modal-category-badge {
+  display: inline-block;
 }
 
 /* Dynamic colors based on class added by Javascript */
@@ -683,11 +690,6 @@ body.dark-theme .modal-close-btn {
 
 .modal-badge-wrapper {
   margin-top: 0;
-}
-
-.modal-badge-wrapper .category-badge {
-  position: static;
-  display: inline-block;
 }
 
 .modal-body h2 {

@@ -153,7 +153,7 @@ function renderCards(data) {
     card.innerHTML = `
       <div class="card-img-container">
         <img src="${item.image}" alt="${item.name}" loading="lazy" />
-        <span class="category-badge badge-${item.category}">${item.categoryLabel}</span>
+        <span class="card-category-badge badge-${item.category}">${item.categoryLabel}</span>
       </div>
       <div class="card-info">
         <h4>${item.name}</h4>
@@ -235,7 +235,7 @@ function openModal(id) {
 
   // Isi data ke elemen modal
   modalCategory.textContent = item.categoryLabel;
-  modalCategory.className = `category-badge badge-${item.category}`;
+  modalCategory.className = `modal-category-badge badge-${item.category}`;
 
   modalTitle.textContent = item.name;
   modalImage.src = item.image;
