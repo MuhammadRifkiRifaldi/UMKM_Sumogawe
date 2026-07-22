@@ -678,10 +678,11 @@ body.dark-theme .modal-close-btn {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-top: 24px;
 }
 
 .modal-badge-wrapper {
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 .modal-body h2 {
