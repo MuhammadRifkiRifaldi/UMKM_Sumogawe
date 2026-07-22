@@ -685,6 +685,11 @@ body.dark-theme .modal-close-btn {
   margin-top: 0;
 }
 
+.modal-badge-wrapper .category-badge {
+  position: static;
+  display: inline-block;
+}
+
 .modal-body h2 {
   font-size: 26px;
   font-weight: 800;
