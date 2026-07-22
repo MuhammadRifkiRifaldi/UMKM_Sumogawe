@@ -116,17 +116,16 @@ button, input {
   gap: 12px;
 }
 
-.brand-icon {
-  font-size: 32px;
-  color: var(--accent-color);
-  background: var(--primary-dark);
-  padding: 8px;
-  border-radius: var(--radius-sm);
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-speed) var(--transition-ease);
 }
 
-.brand:hover .brand-icon {
+.brand:hover .brand-logo {
   transform: rotate(-10deg) scale(1.1);
 }
 

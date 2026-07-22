@@ -1,10 +1,11 @@
-const CACHE_NAME = 'umkm-sumogawe-v14';
+const CACHE_NAME = 'umkm-sumogawe-v15';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
-  './manifest.json'
+  './manifest.json',
+  './logo.jpg'
 ];
 
 // Install Service Worker and cache resources
