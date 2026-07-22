@@ -435,26 +435,9 @@ body.dark-theme .filter-btn.active {
   transition: all var(--transition-speed) var(--transition-ease);
 }
 
-.umkm-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--primary-color);
-  opacity: 0;
-  transition: opacity var(--transition-speed);
-}
-
 .umkm-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary-light);
-}
-
-.umkm-card:hover::after {
-  opacity: 1;
 }
 
 .card-img-container {
