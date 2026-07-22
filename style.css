@@ -466,6 +466,7 @@ body.dark-theme .filter-btn.active {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #ffffff;
+  background-color: #718096; /* Default warna abu-abu jika kategori tidak dikenali (Lainnya) */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -483,6 +484,7 @@ body.dark-theme .filter-btn.active {
 .badge-susu { background-color: #3a86c8; }
 .badge-tani { background-color: #2a9d8f; }
 .badge-kuliner { background-color: #e76f51; }
+.badge-toko { background-color: #f4a261; } /* Warna orange/peach untuk toko kelontong */
 .badge-kerajinan { background-color: #8338ec; }
 
 .card-info {
