@@ -1,4 +1,4 @@
-const CACHE_NAME = 'umkm-sumogawe-v8';
+const CACHE_NAME = 'umkm-sumogawe-v9';
 const ASSETS = [
   './',
   './index.html',
