@@ -461,7 +461,7 @@ body.dark-theme .filter-btn.active {
   height: 180px;
   overflow: hidden;
   position: relative;
-  background: var(--primary-dark);
+  background: transparent;
 }
 
 .card-img-container img {
