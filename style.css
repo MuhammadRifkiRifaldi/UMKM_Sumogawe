@@ -353,7 +353,7 @@ body.dark-theme .section-header h3 {
 .filters-scroll {
   overflow-x: auto;
   margin-bottom: 32px;
-  padding-bottom: 8px;
+  padding: 8px 4px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -681,7 +681,7 @@ body.dark-theme .modal-close-btn {
 }
 
 .modal-badge-wrapper {
-  margin-top: 8px;
+  margin-top: 24px;
 }
 
 .modal-body h2 {
