@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal UMKM Desa Sumogawe</title>
+    
+    <!-- PWA Meta & Manifest -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1b4332" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/192/609/609803.png" />
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Boxicons (Icons Library) -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-container">
+        <div class="brand">
+          <i class="bx bx-store-alt brand-icon"></i>
+          <div>
+            <h1>UMKM Sumogawe</h1>
+            <p>Digitalisasi & Pemetaan Desa</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode">
+            <i class="bx bx-moon theme-icon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h2>Temukan Potensi Lokal Desa Sumogawe</h2>
+          <p>Mendukung digitalisasi ekonomi pelaku usaha mikro di lereng Gunung Merbabu</p>
+          
+          <!-- Search Bar -->
+          <div class="search-wrapper">
+            <i class="bx bx-search search-icon"></i>
+            <input type="text" id="search-input" placeholder="Cari nama UMKM atau produk..." autocomplete="off" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Map Section -->
+      <section class="map-section">
+        <div class="section-header">
+          <h3><i class="bx bx-map-pin"></i> Peta Wilayah Desa</h3>
+          <p>Peta lokasi Desa Sumogawe terintegrasi langsung dengan Google Maps</p>
+        </div>
+        <div class="map-container-card">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15830.407239272365!2d110.42851174999999!3d-7.364287849999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a77e5d836bb65%3A0xa59f77f8ecad358f!2sSumogawe%2C%20Getasan%2C%20Semarang%20Regency%2C%20Central%20Java!5e0!3m2!1sid!2sid!4v1719280000000!5m2!1sid!2sid" 
+            width="100%" 
+            height="400" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </section>
+
+      <!-- Directory Section -->
+      <section class="directory-section">
+        <div class="section-header">
+          <h3><i class="bx bx-list-ul"></i> Direktori UMKM</h3>
+          <p>Saring berdasarkan kategori produk lokal Desa Sumogawe</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filters-scroll">
+          <div class="filters-container">
+            <button class="filter-btn active" data-category="all">Semua</button>
+            <button class="filter-btn" data-category="susu"><i class="bx bx-color-fill"></i> Susu & Ternak</button>
+            <button class="filter-btn" data-category="tani"><i class="bx bx-leaf"></i> Pertanian</button>
+            <button class="filter-btn" data-category="kuliner"><i class="bx bx-cookie"></i> Kuliner</button>
+            <button class="filter-btn" data-category="kerajinan"><i class="bx bx-wrench"></i> Kerajinan & Jasa</button>
+          </div>
+        </div>
+
+        <!-- UMKM Cards Grid -->
+        <div id="cards-grid" class="cards-grid">
+          <!-- Dinamis di-render lewat JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-container">
+        <div class="footer-info">
+          <h4>Portal UMKM Desa Sumogawe</h4>
+          <p>Dikembangkan untuk program digitalisasi UMKM dalam KKN GIAT Desa Sumogawe 2026.</p>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2026 Desa Sumogawe. Hak Cipta Dilindungi.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Detail Modal -->
+    <div id="detail-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <button id="modal-close" class="modal-close-btn" aria-label="Tutup Detail">
+          <i class="bx bx-x"></i>
+        </button>
+        <div class="modal-body">
+          <div class="modal-badge-wrapper">
+            <span id="modal-category" class="category-badge">Kategori</span>
+          </div>
+          <h2 id="modal-title">Nama UMKM</h2>
+          
+          <div class="modal-image-container">
+            <img id="modal-image" src="" alt="Foto Produk" />
+          </div>
+
+          <div class="modal-content-details">
+            <div class="detail-grid" style="grid-template-columns: 1fr;">
+              <div class="detail-group">
+                <h4><i class="bx bx-time-five"></i> Jam Buka</h4>
+                <p id="modal-hours">08:00 - 17:00 WIB</p>
+              </div>
+            </div>
+
+            <div class="detail-group">
+              <h4><i class="bx bx-map"></i> Alamat</h4>
+              <p id="modal-address">Dusun Sumogawe, RT 01 / RW 02, Desa Sumogawe</p>
+            </div>
+          </div>
+
+          <div class="modal-actions" style="grid-template-columns: 1fr;">
+            <a id="modal-maps-link" href="" target="_blank" rel="noopener noreferrer" class="btn btn-maps" style="width: 100%; justify-content: center;">
+              <i class="bx bx-navigation"></i> Petunjuk Rute Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Worker unregistration script (Untuk Fase Development agar tidak cache) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (let registration of registrations) {
+            registration.unregister().then((success) => {
+              if (success) {
+                console.log('PWA Cache / Service Worker lama berhasil dihapus untuk fase Development!');
+                window.location.reload(); // Muat ulang halaman sekali untuk memicu pengambilan versi jaringan terbaru
+              }
+            });
+          }
+        });
+      }
+    </script>
+    
+    <!-- Application Logic Script -->
+    <script src="app.js?v=2"></script>
+  </body>
+</html>
