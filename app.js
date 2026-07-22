@@ -67,7 +67,8 @@ async function fetchGoogleSheetData(spreadsheetId) {
     tani: "Pertanian",
     kuliner: "Kuliner",
     toko: "Toko Kelontong",
-    kerajinan: "Kerajinan & Jasa"
+    kerajinan: "Kerajinan",
+    jasa: "Jasa"
   };
 
   const parsed = [];

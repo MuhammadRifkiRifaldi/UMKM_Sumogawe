@@ -486,6 +486,7 @@ body.dark-theme .filter-btn.active {
 .badge-kuliner { background-color: #e76f51; }
 .badge-toko { background-color: #f4a261; } /* Warna orange/peach untuk toko kelontong */
 .badge-kerajinan { background-color: #8338ec; }
+.badge-jasa { background-color: #4361ee; } /* Warna indigo untuk jasa */
 
 .card-info {
   padding: 20px;
