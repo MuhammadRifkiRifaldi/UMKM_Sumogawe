@@ -295,6 +295,35 @@ searchInput.addEventListener('input', (e) => {
   filterData();
 });
 
+const searchForm = document.getElementById('search-form');
+
+// Toggle class .focused saat input fokus/blur demi kestabilan tampilan di browser HP
+if (searchInput && searchForm) {
+  searchInput.addEventListener('focus', () => {
+    searchForm.classList.add('focused');
+  });
+  searchInput.addEventListener('blur', () => {
+    searchForm.classList.remove('focused');
+  });
+}
+
+// Penanganan submit form pencarian untuk menutup keyboard virtual di HP (Enter/Search key)
+if (searchForm) {
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    searchInput.blur(); // Tutup keyboard virtual
+  });
+}
+
+// Klik ikon cari untuk menutup keyboard virtual
+const searchIconBtn = document.getElementById('search-icon-btn');
+if (searchIconBtn) {
+  searchIconBtn.addEventListener('click', () => {
+    searchInput.blur(); // Tutup keyboard virtual
+    filterData();
+  });
+}
+
 // Tombol filter kategori listener
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
