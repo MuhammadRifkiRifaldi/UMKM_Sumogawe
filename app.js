@@ -12,6 +12,11 @@ const DEFAULT_UMKM_DATA = [];
 
 let umkmData = [];
 
+// PAGINATION CONFIGURATION
+const ITEMS_PER_PAGE = 6;
+let currentPage = 1;
+let currentFilteredData = [];
+
 // Fungsi pembantu untuk mengubah link berbagi Google Drive menjadi link gambar langsung (Direct Download)
 function cleanDriveUrl(url) {
   if (!url) return '';
@@ -157,19 +162,30 @@ function loadLocalDatabase() {
 const cardsGrid = document.getElementById('cards-grid');
 
 function renderCards(data) {
+  currentFilteredData = data;
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+
+  if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+  if (currentPage < 1) currentPage = 1;
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedData = data.slice(startIndex, endIndex);
+
   cardsGrid.innerHTML = '';
 
-  if (data.length === 0) {
+  if (paginatedData.length === 0) {
     cardsGrid.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 48px 16px; color: var(--text-muted);">
         <i class="bx bx-search-alt" style="font-size: 48px; margin-bottom: 8px;"></i>
         <p>Tidak ada UMKM yang cocok dengan pencarian Anda.</p>
       </div>
     `;
+    renderPagination(0);
     return;
   }
 
-  data.forEach(item => {
+  paginatedData.forEach(item => {
     const card = document.createElement('div');
     card.className = 'umkm-card';
     card.setAttribute('onclick', `openModal(${item.id})`);
@@ -197,6 +213,56 @@ function renderCards(data) {
 
     cardsGrid.appendChild(card);
   });
+
+  renderPagination(totalPages);
+}
+
+const paginationContainer = document.getElementById('pagination-container');
+
+function renderPagination(totalPages) {
+  if (!paginationContainer) return;
+
+  if (totalPages <= 1) {
+    paginationContainer.innerHTML = '';
+    return;
+  }
+
+  let html = '';
+
+  // Tombol Sebelumnya
+  html += `
+    <button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})" aria-label="Halaman Sebelumnya">
+      <i class="bx bx-chevron-left"></i> <span>Sebelumnya</span>
+    </button>
+  `;
+
+  // Nomor Halaman
+  for (let i = 1; i <= totalPages; i++) {
+    html += `
+      <button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">
+        ${i}
+      </button>
+    `;
+  }
+
+  // Tombol Selanjutnya
+  html += `
+    <button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})" aria-label="Halaman Selanjutnya">
+      <span>Selanjutnya</span> <i class="bx bx-chevron-right"></i>
+    </button>
+  `;
+
+  paginationContainer.innerHTML = html;
+}
+
+function changePage(page) {
+  currentPage = page;
+  renderCards(currentFilteredData);
+  // Scroll smooth ke bagian header directory agar tidak diam di bawah
+  const sectionHeader = document.querySelector('.directory-section .section-header');
+  if (sectionHeader) {
+    sectionHeader.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 // ====================================================
@@ -209,11 +275,12 @@ let activeCategory = 'all';
 let searchQuery = '';
 
 function filterData() {
+  currentPage = 1; // Reset ke halaman pertama saat mencari atau memfilter
   const filtered = umkmData.filter(item => {
     const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
     const matchesSearch = item.name.toLowerCase().includes(searchQuery) ||
-      item.products.toLowerCase().includes(searchQuery) ||
-      item.shortDesc.toLowerCase().includes(searchQuery);
+      (item.products && item.products.toLowerCase().includes(searchQuery)) ||
+      (item.shortDesc && item.shortDesc.toLowerCase().includes(searchQuery));
     return matchesCategory && matchesSearch;
   });
 
