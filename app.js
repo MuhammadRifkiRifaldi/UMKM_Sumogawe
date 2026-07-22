@@ -200,8 +200,8 @@ function renderCards(data) {
         <p class="short-desc">${item.shortDesc}</p>
         <div class="card-footer">
           <div class="location-info">
-            <i class="bx bx-map"></i>
-            <span>${item.owner}</span>
+            <i class="bx bx-time-five"></i>
+            <span>${item.hours}</span>
           </div>
           <div class="action-text">
             <span>Detail</span>
